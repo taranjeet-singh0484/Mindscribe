@@ -42,3 +42,13 @@ app.use("/api/ai", aiRoutes);
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server successfuly running on http://localhost:${PORT}`));
+
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Something went wrong on the server",
+    error: err.message,
+  });
+});

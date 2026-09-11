@@ -92,22 +92,29 @@ const updatePost = async (req, res) => {
 // @route   DELETE /api/posts/:id
 // @access  Private (Author or Admin)
 const deletePost = async (req, res) => {
-    try {
-        const post = await BlogPost.findById(req.params.id);
-        if (!post) return res.status(404).json({ message: "Post not found" });
+  try {
+    const post = await BlogPost.findById(req.params.id);
+    if (!post) return res.status(404).json({ message: "Post not found" });
 
-        // to delete cloudinary image
-        if (post?.coverImageUrl?.public_id) {
-            await cloudinary.uploader.destroy(post.coverImageUrl.public_id);
-        }
-
-        await post.deleteOne();
-        res.json({ message: "Post deleted" });
-
-    } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    // ❗ Only Author can delete
+    if (post.author.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "You are not the author of this post" });
     }
+
+    // Delete image from Cloudinary
+    if (post.coverImageUrl?.public_id) {
+      await cloudinary.uploader.destroy(post.coverImageUrl.public_id);
+    }
+
+    await post.deleteOne();
+    res.json({ message: "Post deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 };
+
 
 // @desc    Get blog posts by status (all, published, or draft) and include counts
 // @route   GET /api/posts?status=published|draft|all&page=1
