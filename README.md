@@ -2,8 +2,6 @@
 
 **VoiceGrid** is an AI-powered blogging platform built with the MERN stack, integrating the Gemini API for effortless content generation. It offers secure authentication, responsive design, and efficient content management to enhance creativity and user engagement.
 
-🚀 Live Demo: [https://voicegrid-ai-blogapp-frontend.vercel.app](https://voicegrid-ai-blogapp-frontend.vercel.app)  
-🌐 GitHub Repo: [YoJu310/voicegrid-ai-blogapp](https://github.com/YoJu310/voicegrid-ai-blogapp)  
 
 ---
 
@@ -139,11 +137,6 @@ Make sure you have the following installed:
 
 Feel free to fork this repository and submit pull requests. All contributions are welcome!
 
-
-## 👩‍💻 Author
-
-Developed by Yojna Singh
-🔗 [GitHub](https://github.com/YoJu310) 
 
 
 **VoiceGrid** — Where creativity meets AI for effortless blogging.
